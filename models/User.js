@@ -1,4 +1,6 @@
 const mongoose = require("mongoose"),
+
+
   UserSchema = new mongoose.Schema({
     name: {
       type: String,
@@ -18,8 +20,8 @@ const mongoose = require("mongoose"),
     password: {
       type: String,
       required: [true, "please provide a valid password"],
-      minlength: 8,
-      maxlength: 12,
+      minlength: 6,
+      
     },
   });
 
