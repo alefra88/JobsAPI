@@ -1,6 +1,6 @@
 const User = require("../models/User");
 const { StatusCodes } = require("http-status-codes");
-const { badRequestError, UnauthenticatedError } = require("../errors");
+const { BadRequestError, UnauthenticatedError } = require("../errors");
 
 const register = async (req, res) => {
     const user = await User.create({ ...req.body });
@@ -10,7 +10,7 @@ const register = async (req, res) => {
   login = async (req, res) => {
     const { email, password } = req.body;
     if (!email || !password) {
-      throw new badRequestError(`please provide email and password`);
+      throw new BadRequestError(`please provide email and password`);
     }
     const user = await User.findOne({ email });
     if (!user) {
