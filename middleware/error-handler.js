@@ -11,7 +11,8 @@ const errorHandlerMiddleware = (err, req, res, next) => {
   //   return res.status(err.statusCode).json({ msg: err.message });
   // }
 
-  if (err.name === "ValidatorError") {
+  if (err.name === "ValidationError") {
+    console.log(Object.values(err.errors))
     customError.msg = Object.values(err.errors)
       .map((item) => item.message)
       .join(",");
@@ -23,8 +24,8 @@ const errorHandlerMiddleware = (err, req, res, next) => {
     )} field,please choose another value`;
     customError.statusCode = 400;
   }
-  return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ err });
-  // return res.status(customError.statusCode).json({ msg: customError.msg });
+  // return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ err });
+  return res.status(customError.statusCode).json({ msg: customError.msg });
 };
 
 module.exports = errorHandlerMiddleware;
